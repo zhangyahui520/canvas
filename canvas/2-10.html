@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<canvas id="canvas" style="display: block;margin: 50px auto;"></canvas>
+
+
+<script type="text/javascript">
+	window.onload=function(){
+		
+		var canvas=document.getElementById("canvas");
+		
+		canvas.width=800;
+		canvas.height=800;
+		
+		var context=canvas.getContext("2d");
+		
+		var r=50;
+		drawRound(context,r,r,r,1*Math.PI,1.5*Math.PI);
+		drawRound(context,canvas.width-r,r,r,1.5*Math.PI,0);
+		drawRound(context,canvas.width-r,canvas.height-r,r,0,0.5*Math.PI);
+		drawRound(context,r,canvas.height-r,r,0.5*Math.PI,1*Math.PI);
+		
+		drawLine(context,r,0,canvas.width-r,0);
+		drawLine(context,canvas.width,r,canvas.width,canvas.height-r);
+		drawLine(context,canvas.width-r,canvas.height,r,canvas.height);
+		drawLine(context,0,canvas.height-r,0,r);
+	}
+	
+	function drawRound(ctx,x,y,r,begin,end)
+	{
+		ctx.beginPath();
+		ctx.arc(x,y,r,begin,end);
+		ctx.stroke();
+	}
+	function drawLine(ctx,x1,y1,x2,y2)
+	{
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(x2,y2);
+		ctx.stroke();
+	}
+	</script>
+</body>
+</html>

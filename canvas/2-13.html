@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<canvas id="canvas" style="border: 1px solid #aaa; display: block;margin: 50px auto;"></canvas>
+
+<script type="text/javascript">
+	
+	window.onload=function(){
+		
+		var canvas=document.getElementById("canvas");
+		
+		canvas.width=800;
+		canvas.height=800;
+		
+		var context=canvas.getContext("2d");
+		
+		
+		var lineStyle=context.createLinearGradient(0,0,800,0);
+		lineStyle.addColorStop(0.0,"red");
+		lineStyle.addColorStop(0.25,"orange");
+		lineStyle.addColorStop(0.5,"yellow");
+		lineStyle.addColorStop(0.75,"green");
+		lineStyle.addColorStop(1.0,"purple");
+		
+		context.fillStyle=lineStyle;
+		context.font="bold 50px Arial";
+		context.fillText("没有苦逼的青春，何来牛逼的人生",40,100);
+		
+		context.font="italic bold 50px Arial";
+		context.fillText("没有苦逼的青春，何来牛逼的人生",40,300);
+		
+		context.font="oblique bold 50px Arial";
+		context.fillText("没有苦逼的青春，何来牛逼的人生",40,500);
+	}
+	
+	</script>
+</body>
+</html>

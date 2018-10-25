@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	#canvas-wrapper{
+		width: 1200px;
+		height: 800px;
+		position: relative;
+		margin: 50px auto;
+	}
+	#canvas{
+		 border: 1px solid #aaa;
+	}
+	#controler
+	{
+		position: absolute;
+		top:30px;
+		left: 30px;
+		background-color: rgba(0,85,116,0.7);
+		padding: 5px 20px 25px 20px;
+		border-radius: 10px 10px;
+	}
+	#controler h1{
+		color: white;
+		font-weight: bold;
+		font-family: Consolas, Andale Mono, Lucida Console, Lucida Sans Typewriter, Monaco, Courier New, monospace;
+	}
+	#controler #canvas-btn{
+		display: inline-block;
+		background-color: #8b0;
+		color: white;
+		font-size: 14px;
+		padding: 5px 15px;
+		border-radius: 6px 6px;
+		text-decoration: none;
+		margin-top: 10px ;
+		margin-right: 20px;
+	}
+	
+	#controler #canvas-btn:hover{
+		text-decoration: none;
+		background-color: #7a0;
+		
+	}
+	
+	#controler .color-btn{
+		display: inline-block;
+		padding: 5px 15px;
+		border-radius: 6px 6px;
+		font-size: 14px;
+		margin-top: 10px;
+		margin-right: 5px;
+		text-decoration: none;
+	}
+	
+	#controler .color-btn:hover{
+	 	text-decoration: none;
+	}
+	#controler #white-color-btn{
+		background-color: white;
+	}
+	#controler #black-color-btn{
+		background-color: black;
+	}
+	</style>
+</head>
+
+<body>
+<div id="canvas-wrapper">
+	<canvas id="canvas" style="display: block;margin: 50px auto;"></canvas>
+
+<div id="controler">
+	<h1>CANVAS 绘图之旅</h1>
+	<a href="#" id="canvas-btn"></a>
+	<a href="#" class="color-btn" id="white-color-btn">&nbsp;</a>
+	<a href="#" class="color-btn" id="black-color-btn">&nbsp;</a>
+</div>
+</div>
+
+
+<script type="text/javascript">
+	
+	
+	var  isMoving=true;
+	var themeColor="white";
+	
+	var balls=[];
+	window.onload=function(){
+		var canvas=document.getElementById("canvas");
+	
+		canvas.width=1200;
+		canvas.height=800;
+		var context=canvas.getContext("2d");
+		//context.globalAlpha=0.7;
+		for(var i=0;i<100;i++)
+			{
+				var R=Math.floor(Math.random()*255);
+				var G=Math.floor(Math.random()*255);
+				var B=Math.floor(Math.random()*255);
+				var radius=Math.random()*50+20;
+				aball={
+					color:"rgb("+R+","+G+","+B+")",
+					radius:radius,
+					x:Math.random()*(canvas.width-2*radius)+radius,
+					y:Math.random()*(canvas.height-2*radius)+radius,
+					vx:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100)),
+					vy:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100))
+				};
+				balls[i]=aball;
+			}
+			setInterval(
+			function(){
+				draw(context);
+				if(isMoving)
+					{
+						update(canvas.width,canvas.height);
+					}
+				
+			},50);
+		
+	}
+	
+	document.getElementById("canvas-btn").onclick=function(event){
+		if(isMoving)
+			{
+				isMoving=false;
+				this.text="开始运动";
+			}
+		else
+			{
+				isMoving=true;
+				this.text="停止运动";
+			}
+		return false;
+	}
+	
+	document.getElementById("white-color-btn").onclick=function(event){
+		themeColor="white";
+		return false;
+	}
+	document.getElementById("black-color-btn").onclick=function(event){
+		themeColor="black";
+		return false;
+	}
+	function draw(ctx){
+		
+		var canvas=ctx.canvas;
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		
+		if(themeColor=="black")
+			{
+				ctx.fillStyle="black";
+				ctx.fillRect(0,0,canvas.width,canvas.height);
+			}
+		for(var i=0;i<balls.length;i++)
+			{
+				//ctx.globalCompositeOperation="xor";
+				ctx.globalCompositeOperation="lighter";
+				ctx.fillStyle=balls[i].color;
+				ctx.beginPath();
+				ctx.arc(balls[i].x,balls[i].y,balls[i].radius,0,2*Math.PI);
+				ctx.closePath();
+				ctx.fill();
+			}
+		
+	}
+	
+	function update(canvasWidth,canvasHeight)
+	{
+		for(var i=0;i<balls.length;i++)
+			{
+				balls[i].x+=balls[i].vx;
+				balls[i].y+=balls[i].vy;
+				
+				if(balls[i].x-balls[i].radius<=0)
+					{
+						balls[i].x=balls[i].radius;
+						balls[i].vx=-balls[i].vx;
+					}
+				if(balls[i].x+balls[i].radius>=canvasWidth)
+					{
+						balls[i].x=canvasWidth-balls[i].radius;
+						balls[i].vx=-balls[i].vx;
+					}
+				if(balls[i].y-balls[i].radius<=0)
+					{
+						balls[i].y=balls[i].radius;
+						balls[i].vy=-balls[i].vy;
+					}
+				if(balls[i].y+balls[i].radius>=canvasHeight)
+					{
+						balls[i].y=canvasHeight-balls[i].radius;
+						balls[i].vy=-balls[i].vy;
+					}
+			}
+	}
+	</script>
+</body>
+</html>

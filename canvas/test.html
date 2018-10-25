@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;"></canvas>
+
+<script type="text/javascript">
+	
+	var searchLight={x:400,y:400,radius:150,vx:Math.random()*5+10,vy:Math.random()*5+10};
+	var rot=0;
+	
+	window.onload=function(){
+		
+		var canvas=document.getElementById("canvas");
+		
+		canvas.width=800;
+		canvas.height=800;
+		
+		var ctx=canvas.getContext("2d");
+		
+		ctx.save();
+		//ctx.arc(searchLight.x,searchLight.y,searchLight.radius,0,Math.PI*2);
+		ctx.translate(searchLight.x,searchLight.y);
+		ctx.rotate(rot/180*Math.PI);
+		ctx.scale(searchLight.radius,searchLight.radius);
+		
+		starPath(ctx);
+		ctx.fillStyle="#fff";
+		ctx.fill();
+		ctx.stroke();
+	
+	    function starPath(cxt)
+		{
+
+			cxt.beginPath();
+			for(var i=0;i<5;i++)
+				{
+					cxt.lineTo(Math.cos(18+72*i)/180*Math.PI,-Math.sin(18+72*i)/180*Math.PI);
+					cxt.lineTo(Math.cos(54+72*i)/180*Math*0.5.PI,-Math.sin(54+72*i)/180*Math.PI*0.5);
+				}
+			cxt.closePath();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>线性渐变色</title>
+</head>
+
+<body>
+<canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;"></canvas>
+
+<script type="text/javascript">
+	
+	window.onload=function(){
+		
+		var canvas=document.getElementById("canvas");
+		
+		canvas.width=800;
+		canvas.height=800;
+		
+		var context=canvas.getContext("2d");
+		
+		var linearGaid=context.createLinearGradient(0,0,canvas.width,canvas.height);
+		linearGaid.addColorStop(0.0,"white");
+		linearGaid.addColorStop(0.25,"yellow");
+		linearGaid.addColorStop(0.5,"green");
+		linearGaid.addColorStop(0.75,"blue");
+		linearGaid.addColorStop(1.0,"black");
+		
+		context.fillStyle=linearGaid;
+		context.fillRect(0,0,800,800);
+		
+	}
+	
+	
+	</script>
+</body>
+</html>

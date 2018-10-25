@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>变换矩阵</title>
+</head>
+
+<body>
+<canvas id="canvas" style="border: 1px solid #aaa;block;margin: 50px auto;"></canvas>
+
+<script type="text/javascript">
+	
+	window.onload=function(){
+		
+		var canvas=document.getElementById("canvas");
+		
+		canvas.width=document.documentElement.clientWidth;
+		canvas.height=document.documentElement.clientHeight;
+		
+		
+		var context=canvas.getContext("2d");
+		
+		context.fillStyle="red";
+		context.strokeStyle="#058";
+		context.lineWidth=5;
+		
+		//a c e
+		//b d f
+		//0 0 1
+		
+		
+		//a d 水平 垂直缩放
+		//b c 水平 垂直倾斜
+		//e f 水平 垂直位移
+		//transform(a,b,c,d,e,f)
+		
+		context.save();
+		context.transform(2,0.2,0.2,1.5,100,100);
+		context.fillRect(50,50,300,300);
+		context.strokeRect(50,50,300,300);
+		context.restore();
+		
+	}
+	
+	</script>
+</body>
+</html>

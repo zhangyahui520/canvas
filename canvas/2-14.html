@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+
+<script type="text/javascript">
+	
+	var canvas=document.getElementById("canvas");
+	
+	canvas.width=800;
+	canvas.height=800;
+	
+	var context=canvas.getContext("2d");
+	
+	context.fillStyle="#058";
+	context.font="bold 120px Arail";
+	
+	context.textAlign="center";
+	context.textBaseline="middle";
+	
+	context.shadowColor="gray";
+	context.shadowOffsetX=10;
+	context.shadowOffsetY=10;
+	context.shadowBlur=5;
+	
+	context.fillText("CANVAS",canvas.width/2,canvas.height/2);
+	</script>
+</body>
+</html>
